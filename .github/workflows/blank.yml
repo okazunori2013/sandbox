@@ -13,9 +13,10 @@ jobs:
     steps:
       - name: install dependencies
         run: |
-          fsutil 8dot3name set 0
           fsutil 8dot3name query c
-          fsutil 8dot3name query 
+          fsutil 8dot3name query d
+          fsutil 8dot3name query
+          fsutil 8dot3name set 0
           (Get-MpPreference).DisableRealtimeMonitoring
           Set-MpPreference -DisableRealtimeMonitoring 0
           (Get-MpPreference).DisableRealtimeMonitoring
