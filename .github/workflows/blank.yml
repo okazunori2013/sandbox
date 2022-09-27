@@ -13,6 +13,7 @@ jobs:
       - name: install dependencies
         run: |
           fsutil 8dot3name set 0
+          (Get-MpPreference).DisableRealtimeMonitoring
           Set-MpPreference -DisableRealtimeMonitoring 0
           (Get-MpPreference).DisableRealtimeMonitoring
           Set-MpPreference -DisableRealtimeMonitoring 1
