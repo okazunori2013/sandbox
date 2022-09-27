@@ -14,5 +14,8 @@ jobs:
         run: |
           fsutil 8dot3name set 0
           Set-MpPreference -DisableRealtimeMonitoring 0
+          (Get-MpPreference).DisableRealtimeMonitoring
+          Set-MpPreference -DisableRealtimeMonitoring 1
+          (Get-MpPreference).DisableRealtimeMonitoring
       - name: Checkout
         uses: actions/checkout@v3 
