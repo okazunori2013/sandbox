@@ -5,6 +5,7 @@ on:
   push:
     branches: 
       - master
+      - main
   workflow_dispatch:
 jobs:
   build:
@@ -13,6 +14,8 @@ jobs:
       - name: install dependencies
         run: |
           fsutil 8dot3name set 0
+          fsutil 8dot3name query c
+          fsutil 8dot3name query 
           (Get-MpPreference).DisableRealtimeMonitoring
           Set-MpPreference -DisableRealtimeMonitoring 0
           (Get-MpPreference).DisableRealtimeMonitoring
