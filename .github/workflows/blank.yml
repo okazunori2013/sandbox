@@ -33,8 +33,7 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-          echo test
-          cheak_existing=$(
+           echo cheak_existing=$(
             git fetch origin create-pull-request/cuda &&
             git cheakout -b create-pull-request/cuda &&
             echo true || echo false
