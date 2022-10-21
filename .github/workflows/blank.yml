@@ -38,7 +38,7 @@ jobs:
         id: cheak_diff
         run: |
             git branch -a
-            git fetch -q "remotes/origin/create-pull-request/cuda"　|| echo "diff=true" >> $GITHUB_OUTPUT && exit 0
+            git fetch -q "origin create-pull-request/cuda"　|| echo "diff=true" >> $GITHUB_OUTPUT && exit 0
             git branch 
             git diff --name-only
             echo "test"
