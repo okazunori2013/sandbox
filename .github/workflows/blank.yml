@@ -37,7 +37,7 @@ jobs:
         run: |
             git fetch origin create-pull-request/cuda &&
             git branch &&
-            git stash   &&
+            git stash &&
             git checkout origin/create-pull-request/cuda &&
             git diff --name-only &&
               if [ "$(git diff --name-only)" == "cuda-toolkit-archive.html" ]; then
