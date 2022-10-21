@@ -36,17 +36,19 @@ jobs:
         id: cheak_diff
         run: |
             if [ "$(git fetch origin create-pull-request/cuda | wc -l)"]; then
+              git fetch origin create-pull-request/cuda
               git cheakout -b create-pull-request/cuda &&
               git reset --hard HEAD
               if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
                 echo "diff=true" >> $GITHUB_OUTPUT
-              fi
+              else
+                echo "diff=false" >> $GITHUB_OUTPUT
             else
-             echo "diff=false" >> $GITHUB_OUTPUT
+              echo "diff=true" >> $GITHUB_OUTPUT
             fi
       - name: Create Pull Request
         id: cpr
-        if: (${{ steps.cheak_diff.outputs.diff }} == true) && (${{ steps.cuda-update.outputs.update }} == true)
+        if: (${{ steps.cheak_diff.outputs.diff }} == ${{ steps.cuda-update.outputs.update }})
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
