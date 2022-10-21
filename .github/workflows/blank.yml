@@ -33,8 +33,8 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-         echo "test_existing=$( git fetch origin create-pull-request/cuda && git cheakout -b create-pull-request/cuda && echo true || echo false )"
-          if [${{cheak_existing}} == true]; then
+         echo "TK=$( git fetch origin create-pull-request/cuda && git cheakout -b create-pull-request/cuda && echo true || echo false )"
+          if [${{TK}} == true]; then
             if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
               echo "diff=$(git status -s)" >> $GITHUB_OUTPUT 
             fi
