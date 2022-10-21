@@ -35,7 +35,7 @@ jobs:
           echo "BRANCH_EXISTS=$(git ls-remote --heads origin create-pull-request/cuda | tr -d '\n')" >> $GITHUB_ENV
       - name: Create Pull Request
         id: cpr
-        if: ${{ ${{ steps.cuda-update.outputs.update }} && "env.BRANCH_EXISTS == ''"}}
+        if: "env.BRANCH_EXISTS == ''"
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
