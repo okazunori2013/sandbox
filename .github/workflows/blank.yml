@@ -30,9 +30,12 @@ jobs:
         with:
           name: cuda-toolkit-archive.html
           path: cuda-toolkit-archive.html
+      - name: Check for available updates
+        run: |
+          echo "BRANCH_EXISTS=$(git ls-remote --heads origin ${UPDATE_BRANCH_NAME} | tr -d '\n')" >> $GITHUB_ENV
       - name: Create Pull Request
         id: cpr
-        if: ${{ steps.cuda-update.outputs.update }}
+        if: ${{ steps.cuda-update.outputs.update }} && "env.BRANCH_EXISTS == ''"
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
