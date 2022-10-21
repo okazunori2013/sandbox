@@ -48,7 +48,9 @@ jobs:
               echo "diff=true" >> $GITHUB_OUTPUT
             fi
             git checkout -b origin main
-            git branch -D create-pull-request/cuda
+            cd ../
+            ls
+            rm -rf *
       - name: Create Pull Request
         id: cpr
         if: (${{ steps.cheak_diff.outputs.diff }} == ${{ steps.cuda-update.outputs.update }})
