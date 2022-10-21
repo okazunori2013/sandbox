@@ -32,7 +32,9 @@ jobs:
           path: cuda-toolkit-archive.html
       - name: Check for available updates
         run: |
+          git branch
           git fetch origin create-pull-request/cuda
+          git branch
           echo "BRANCH_EXISTS=$(git ls-remote --heads origin create-pull-request/cuda | tr -d '\n')" >> $GITHUB_ENV
           echo ${{env.BRANCH_EXISTS}}
       - name: Create Pull Request
