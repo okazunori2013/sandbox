@@ -23,7 +23,7 @@ jobs:
           git config --global core.autocrlf false
           git config --global advice.detachedHead false
           curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
-          if [ -n "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
+          if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
             echo "update=true" >> $GITHUB_OUTPUT
           else
             echo "update=false" >> $GITHUB_OUTPUT
@@ -35,7 +35,7 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-            if [ $(git fetch -q origin create-pull-request/cuda) ]; then
+            if [ -n  $(git fetch -q origin create-pull-request/cuda) ]; then
               echo "diff=true" >> $GITHUB_OUTPUT && exit 0
             fi 
             git branch 
