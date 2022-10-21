@@ -35,3 +35,7 @@ jobs:
           commit-message: "[bot]update cuda-toolkit-archive"
           title: "cuda-toolkit-archive update"
           labels: cuda
+          body: maybe update CUDA cheak [cuda-toolkit-archive](https://developer.nvidia.com/cuda-toolkit-archive)
+          assignees: okazunori2013
+          reviewers: okazunori2013
+          draft: true
