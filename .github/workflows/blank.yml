@@ -35,6 +35,7 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
+            ls --all
             if [ "$(git rev-parse --verify --quiet --all origin create-pull-request/cuda)" ]; then
               git fetch origin create-pull-request/cuda --depth 1
               git checkout -b create-pull-request/cuda
@@ -50,7 +51,7 @@ jobs:
             git checkout -b origin main
             cd ../
             rm -rf ${{ github.repository }}
-            ls
+            ls --all
       - name: Re-Checkout
         uses: actions/checkout@v3
       - name: Create Pull Request
