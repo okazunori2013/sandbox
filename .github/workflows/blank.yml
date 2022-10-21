@@ -33,11 +33,12 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-          cheak=$( \
-            git fetch origin create-pull-request/cuda && \
-            git cheakout -b create-pull-request/cuda && \
-            echo true || echo false \
+          branch_is_existing=$(
+            git fetch origin ${NEW_BRANCH_NAME} &&
+            echo true ||
+            echo false
           )
+          echo "BRANCH_IS_EXISTING=${branch_is_existing}" >> $GITHUB_ENV
           if [${{cheak_existing}} == true]; then
             if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
               echo "diff=$(git status -s)" >> $GITHUB_OUTPUT 
