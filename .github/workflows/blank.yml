@@ -36,8 +36,8 @@ jobs:
         id: cheak_diff
         run: |
             git fetch origin create-pull-request/cuda &
-            echo $? >> $fetch
-            echo $fetch
+            echo $? >> $fetch &
+            echo $fetch &
             if [ $(echo $fetch) != 0 ]; then
               echo "diff=true" >> $GITHUB_OUTPUT && exit 0
             fi 
