@@ -51,8 +51,7 @@ jobs:
             echo "test2"
             git reset --hard origin/main 
             echo "test3"
-            git branch | awk '{ if ($1 != "*") print $1; }' | xargs git branch -D
-            echo "test4"
+            git branch | awk '{ if ($1 != "*") print $1; }' | xargs git branch -D & git branch
       - name: test
         id: test
         run: |
