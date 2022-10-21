@@ -35,8 +35,9 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-            ls --all
-            if [ "$(git rev-parse --verify --quiet --remotes create-pull-request/cuda)" == 0 ]; then
+            if [ "$(git fetch origin origin create-pull-request/cuda &&
+            echo true ||
+            echo false)" == true ]; then
               git fetch origin create-pull-request/cuda --depth 1
               git checkout -b create-pull-request/cuda
               git reset --hard HEAD
@@ -45,30 +46,35 @@ jobs:
               else
                 echo "diff=false" >> $GITHUB_OUTPUT
               fi
+              git checkout -b main
+              git branch -D create-pull-request/cuda
             else
               echo "diff=true" >> $GITHUB_OUTPUT
             fi
-            git checkout -b origin main
-            cd ../
-            rm -rf ${{ github.repository }}
             ls --all
-      - name: Re-Checkout
-        uses: actions/checkout@v3
+      - name: test
+        id: test
+        run: |
+          if [ ""${{ steps.cheak_diff.outputs.diff }}" == "true" && "${{ steps.cuda-update.outputs.update }}" == "true"" ]; then
+            echo "test=true" >> $GITHUB_OUTPUT
+          fi
       - name: Create Pull Request
         id: cpr
-        if: (${{ steps.cheak_diff.outputs.diff }} == ${{ steps.cuda-update.outputs.update }})
+        if: ${{ steps.test.outputs.test }}
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
           title: "cuda-toolkit-archive update"
           labels: cuda
           body: maybe update CUDA cheak [cuda-toolkit-archive](https://developer.nvidia.com/cuda-toolkit-archive)
-          assignees: okazunori2013
           draft: true
           delete-branch: true
           branch: create-pull-request/cuda
+          author: GitHub <noreply@github.com>
       - name: Check outputs
+        if: always()
         run: |
+          echo ${{ steps.test.outputs.test }} test
           echo ${{ steps.cheak_diff.outputs.diff }}
           echo ${{ steps.cuda-update.outputs.update }}
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
