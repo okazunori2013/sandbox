@@ -36,7 +36,7 @@ jobs:
             if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" &&
             "(git fetch origin create-pull-request/cuda &&
             git cheakout -b create-pull-request/cuda &&
-            echo true || echo "diff=$(false)" >> $GITHUB_OUTPUT & echo false ) ]; then
+            echo true || echo 'diff=$(false)' >> $GITHUB_OUTPUT && echo false ) ]; then
               echo "diff=$(git status -s)" >> $GITHUB_OUTPUT 
             fi
       - name: Create Pull Request
