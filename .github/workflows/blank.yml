@@ -39,7 +39,6 @@ jobs:
             echo true ||
             echo false)" == true ]; then
               git checkout origin create-pull-request/cuda
-              git reset origin/create-pull-request/cuda
               if [ "$(git diff --name-only)" == cuda-toolkit-archive.html ]; then
                 echo "diff=true" >> $GITHUB_OUTPUT
               else
