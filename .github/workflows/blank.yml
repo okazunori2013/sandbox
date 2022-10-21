@@ -37,7 +37,7 @@ jobs:
         run: |
             result=$(echo$(git fetch -q origin create-pull-request/cuda))
             echo $result
-            if [ $ == 0 ]; then
+            if [ -z "$result" ]; then
               echo "diff=true" >> $GITHUB_OUTPUT && exit 0
             fi 
             git branch 
