@@ -31,19 +31,25 @@ jobs:
           name: cuda-toolkit-archive.html
           path: cuda-toolkit-archive.html
       - name: Check for available updates
+        id: cheak_diff
         run: |
-          git branch
-          git fetch origin create-pull-request/cuda
-          git branch
-          echo "BRANCH_EXISTS=$(git ls-remote --heads origin create-pull-request/cuda | tr -d '\n')" >> $GITHUB_ENV
-          echo ${{env.BRANCH_EXISTS}}
+          cheak_existing=$(
+            git fetch origin create-pull-request/cuda &&
+            git cheakout -b create-pull-request/cuda &&
+            echo true || echo false
+            )
+          if [${{cheak_existing}} == true]; then
+            if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
+              echo "diff=$(git status -s)" >> $GITHUB_OUTPUT 
+            fi
+          fi
       - name: Create Pull Request
         id: cpr
-        if: "env.BRANCH_EXISTS == ''"
+        if: ${{ steps.cuda-update.outputs.update }} && ${{ steps.cheak_diff.outputs.diff }}
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
-          title: "${{ steps.cuda-update.outputs.update }}"
+          title: "cuda-toolkit-archive update"
           labels: cuda
           body: maybe update CUDA cheak [cuda-toolkit-archive](https://developer.nvidia.com/cuda-toolkit-archive)
           assignees: okazunori2013
