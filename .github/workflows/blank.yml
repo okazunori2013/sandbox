@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Check http status code of production site
         uses: lakuapik/gh-actions-http-status@v1
