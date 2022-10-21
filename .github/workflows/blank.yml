@@ -35,8 +35,8 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-            if [ "$(git rev-parse --verify --quiet --all create-pull-request/cuda)" ]; then
-              git fetch create-pull-request/cuda --depth 1
+            if [ "$(git rev-parse --verify --quiet --all origin/create-pull-request/cuda)" ]; then
+              git fetch origin/create-pull-request/cuda --depth 1
               git checkout -b create-pull-request/cuda
               git reset --hard HEAD
               if [ "$(git diff --name-only)" == cuda-toolkit-archive.html ]; then
@@ -47,8 +47,8 @@ jobs:
             else
               echo "diff=true" >> $GITHUB_OUTPUT
             fi
-            git checkout -b origin main
-            git branch -D origin create-pull-request/cuda
+            git checkout -b origin/main
+            git branch -D origin/origin create-pull-request/cuda
       - name: Create Pull Request
         id: cpr
         if: (${{ steps.cheak_diff.outputs.diff }} == ${{ steps.cuda-update.outputs.update }})
