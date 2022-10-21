@@ -18,7 +18,7 @@ jobs:
         run: |
           curl https://developer.nvidia.com/cuda-toolkit-archive -o cuda-toolkit-archive.html
           cat cuda-toolkit-archive.html
-          if [ "$(git diff --ignore-space-at-eol dist/ | wc -l)" -gt "0" ]; then
+          if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
             echo "Detected uncommitted changes after build.  See status below:"
             git diff
           fi
