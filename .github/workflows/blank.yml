@@ -11,6 +11,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+      - name: Check http status code of production site
+        uses: lakuapik/gh-actions-http-status@v1
+        with:
+          sites: '["https://developer.nvidia.com/cuda-toolkit-archive"]'
+          expected: '[200]'
       - name: Checkout
         uses: actions/checkout@v3 
       - name: install dependencies
@@ -19,7 +24,5 @@ jobs:
           git config --global core.autocrlf false
           curl https://developer.nvidia.com/cuda-toolkit-archive -o cuda-toolkit-archive.html
           if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
-            echo "Detected uncommitted changes after build.  See status below:"
-            git diff --ignore-space-at-eol --diff-algorithm=minimal cuda-toolkit-archive.html
-            exit 1
+            echo "update=$(git diff --ignore-space-at-eol --diff-algorithm=minimal cuda-toolkit-archive.html)" >> $GITHUB_OUTPUT
           fi
