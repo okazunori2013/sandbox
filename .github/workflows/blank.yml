@@ -32,14 +32,16 @@ jobs:
           path: cuda-toolkit-archive.html
       - name: Check for available updates
         run: |
+          git fetch origin create-pull-request/cuda
           echo "BRANCH_EXISTS=$(git ls-remote --heads origin create-pull-request/cuda | tr -d '\n')" >> $GITHUB_ENV
+          echo ${{env.BRANCH_EXISTS}}
       - name: Create Pull Request
         id: cpr
         if: "env.BRANCH_EXISTS == ''"
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
-          title: "cuda-toolkit-archive update"
+          title: "${{ steps.cuda-update.outputs.update }}"
           labels: cuda
           body: maybe update CUDA cheak [cuda-toolkit-archive](https://developer.nvidia.com/cuda-toolkit-archive)
           assignees: okazunori2013
