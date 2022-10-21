@@ -35,7 +35,7 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-            if [ "$(git fetch origin origin create-pull-request/cuda &&
+            if [ "$(git fetch origin create-pull-request/cuda &&
             echo true ||
             echo false)" == true ]; then
               git fetch origin create-pull-request/cuda --depth 1
