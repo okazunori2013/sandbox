@@ -41,7 +41,7 @@ jobs:
               git branch
               git stash
               git checkout origin/create-pull-request/cuda
-              if [ "$(git diff --name-only)" == cuda-toolkit-archive.html ]; then
+              if [ "$(git diff --name-only)" == "cuda-toolkit-archive.html" ]; then
                 echo "diff=false" >> $GITHUB_OUTPUT
               else
                 echo "diff=true" >> $GITHUB_OUTPUT
