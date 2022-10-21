@@ -76,4 +76,3 @@ jobs:
           echo ${{ steps.cheak_diff.outputs.diff }}
           echo ${{ steps.cuda-update.outputs.update }}
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
