@@ -48,7 +48,7 @@ jobs:
               echo "diff=true" >> $GITHUB_OUTPUT
             fi
             git checkout -b origin main
-            cd ../
+            cd ../../
             rm -rf *
       - name: Re-Checkout
         uses: actions/checkout@v3
