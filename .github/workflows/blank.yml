@@ -45,8 +45,11 @@ jobs:
                 echo "diff=false" >> $GITHUB_OUTPUT
               fi 
             git checkout main 
+            echo "test2"
             git reset --hard origin/main 
+            echo "test3"
             git branch | awk '{ if ($1 != "*") print $1; }' | xargs git branch -D
+            echo "test4"
       - name: test
         id: test
         run: |
