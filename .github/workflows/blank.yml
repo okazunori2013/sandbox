@@ -33,13 +33,14 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-            echo "fetch=$(git fetch origin create-pull-request/cuda &&
+            (git fetch origin create-pull-request/cuda &&
             git cheakout -b create-pull-request/cuda &&
-            echo true || echo false)"
-            if [ ${{fetch}} == true ]; then
-              if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
-                echo "diff=$(git status -s)" >> $GITHUB_OUTPUT 
-              fi
+            echo true || echo false)
+            if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" &&
+            (git fetch origin create-pull-request/cuda &&
+            git cheakout -b create-pull-request/cuda &&
+            echo true || echo false) ]; then
+              echo "diff=$(git status -s)" >> $GITHUB_OUTPUT 
             fi
       - name: Create Pull Request
         id: cpr
