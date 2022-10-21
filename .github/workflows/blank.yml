@@ -47,9 +47,7 @@ jobs:
                 echo "diff=false" >> $GITHUB_OUTPUT
               fi
               git checkout .
-              git checkout main
-              git branch -D create-pull-request/cuda
-              git fetch origin main
+              git branch
             else
               echo "diff=true" >> $GITHUB_OUTPUT
             fi
