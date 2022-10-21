@@ -49,8 +49,9 @@ jobs:
             fi
             git checkout -b origin main
             cd ../
-            ls
             rm -rf *
+      - name: Re-Checkout
+        uses: actions/checkout@v3
       - name: Create Pull Request
         id: cpr
         if: (${{ steps.cheak_diff.outputs.diff }} == ${{ steps.cuda-update.outputs.update }})
