@@ -36,7 +36,7 @@ jobs:
         id: cheak_diff
         run: |
             git fetch origin create-pull-request/cuda &&
-            git branch　&&
+            git branch &&
             git stash   &&
             git checkout origin/create-pull-request/cuda &&
             git diff --name-only &&
@@ -46,7 +46,7 @@ jobs:
                 echo "diff=false" >> $GITHUB_OUTPUT
               fi &&
             git checkout . &&
-            $(git checkout main) ||
+            git checkout main ||
             echo "diff=true" >> $GITHUB_OUTPUT
       - name: test
         id: test
