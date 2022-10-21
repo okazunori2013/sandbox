@@ -46,7 +46,7 @@ jobs:
             fi
       - name: Create Pull Request
         id: cpr
-        if: ${{ steps.cheak_diff.outputs.diff }} && ${{ steps.cuda-update.outputs.update }}
+        if: ${{ steps.cheak_diff.outputs.diff }} == true && ${{ steps.cuda-update.outputs.update }} == true
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
