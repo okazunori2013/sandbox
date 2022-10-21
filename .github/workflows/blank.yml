@@ -39,11 +39,10 @@ jobs:
               git fetch origin create-pull-request/cuda
               git cheakout -b create-pull-request/cuda
               git reset --hard HEAD
-              git status
               if [ "$(git diff --name-only)" == cuda-toolkit-archive.html]; then
-                echo "diff=false" >> $GITHUB_OUTPUT
-              else
                 echo "diff=true" >> $GITHUB_OUTPUT
+              else
+                echo "diff=false" >> $GITHUB_OUTPUT
               fi
             else
               echo "diff=true" >> $GITHUB_OUTPUT
