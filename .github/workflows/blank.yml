@@ -32,7 +32,7 @@ jobs:
           path: cuda-toolkit-archive.html
       - name: Check for available updates
         run: |
-          echo "BRANCH_EXISTS=$(git ls-remote --heads origin ${UPDATE_BRANCH_NAME} | tr -d '\n')" >> $GITHUB_ENV
+          echo "BRANCH_EXISTS=$(git ls-remote --heads origin main | tr -d '\n')" >> $GITHUB_ENV
       - name: Create Pull Request
         id: cpr
         if: ${{ steps.cuda-update.outputs.update }} && "env.BRANCH_EXISTS == ''"
