@@ -19,6 +19,7 @@ jobs:
           url: https://developer.nvidia.com/cuda-toolkit-archive
           code: 200
       - name: install dependencies
+        id: cuda-update
         run: |
           git config --global core.autocrlf false
           curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
@@ -30,6 +31,8 @@ jobs:
           name: cuda-toolkit-archive.html
           path: cuda-toolkit-archive.html
       - name: Create Pull Request
+        id: cpr
+        if: ${{ steps.cuda-update.outputs.update }}
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
@@ -38,3 +41,9 @@ jobs:
           body: maybe update CUDA cheak [cuda-toolkit-archive](https://developer.nvidia.com/cuda-toolkit-archive)
           assignees: okazunori2013
           draft: true
+          delete-branch: true
+      - name: Check outputs
+        if: ${{ steps.cpr.outputs.pull-request-number }}
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
