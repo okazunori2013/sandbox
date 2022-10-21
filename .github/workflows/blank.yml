@@ -29,3 +29,9 @@ jobs:
         with:
           name: cuda-toolkit-archive.html
           path: cuda-toolkit-archive.html
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: "[bot]update cuda-toolkit-archive"
+          title: "cuda-toolkit-archive update"
+          labels: cuda
