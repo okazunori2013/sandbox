@@ -43,6 +43,7 @@ jobs:
                 echo "diff=true" >> $GITHUB_OUTPUT
               else
                 echo "diff=false" >> $GITHUB_OUTPUT
+              fi
             else
               echo "diff=true" >> $GITHUB_OUTPUT
             fi
