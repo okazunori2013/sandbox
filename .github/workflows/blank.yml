@@ -43,9 +43,9 @@ jobs:
               git checkout origin/create-pull-request/cuda
               git diff --name-only
               if [ "$(git diff --name-only)" == "cuda-toolkit-archive.html" ]; then
-                echo "diff=false" >> $GITHUB_OUTPUT
-              else
                 echo "diff=true" >> $GITHUB_OUTPUT
+              else
+                echo "diff=false" >> $GITHUB_OUTPUT
               fi
               git switch -
               git checkout .
