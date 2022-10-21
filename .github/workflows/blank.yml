@@ -59,7 +59,7 @@ jobs:
           fi
       - name: Create Pull Request
         id: cpr
-        if: ${{ steps.test.outputs.test }} == true
+        if: ${{ steps.test.outputs.test == 'true' }}
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
