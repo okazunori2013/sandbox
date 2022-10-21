@@ -38,6 +38,8 @@ jobs:
             if [ "$(git fetch origin create-pull-request/cuda &&
             echo true ||
             echo false)" == true ]; then
+              git branch
+              git stash
               git checkout origin/create-pull-request/cuda
               if [ "$(git diff --name-only)" == cuda-toolkit-archive.html ]; then
                 echo "diff=true" >> $GITHUB_OUTPUT
