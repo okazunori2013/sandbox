@@ -24,9 +24,9 @@ jobs:
           git config --global core.autocrlf false
           curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
           if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
-            echo "update=$(true)" >> $GITHUB_OUTPUT
+            echo "update=$true" >> $GITHUB_OUTPUT
           else
-            echo "update=$(false)" >> $GITHUB_OUTPUT
+            echo "update=$false" >> $GITHUB_OUTPUT
           fi
       - uses: actions/upload-artifact@v3
         with:
@@ -37,11 +37,12 @@ jobs:
         run: |
             if [ "$(git fetch origin create-pull-request/cuda | wc -l)"]; then
               git cheakout -b create-pull-request/cuda &&
+              git reset --hard HEAD
               if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
-                echo "diff=$(true)" >> $GITHUB_OUTPUT
+                echo "diff=true" >> $GITHUB_OUTPUT
               fi
             else
-             echo "diff=$(false)" >> $GITHUB_OUTPUT
+             echo "diff=$false" >> $GITHUB_OUTPUT
             fi
       - name: Create Pull Request
         id: cpr
