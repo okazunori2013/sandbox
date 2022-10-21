@@ -22,6 +22,7 @@ jobs:
         id: cuda-update
         run: |
           git config --global core.autocrlf false
+          git config --global advice.detachedHead false
           curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
           if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
             echo "update=true" >> $GITHUB_OUTPUT
