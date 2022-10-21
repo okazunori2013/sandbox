@@ -11,16 +11,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: install dependencies
-        run: |
-          fsutil 8dot3name query c
-          fsutil 8dot3name query d
-          fsutil 8dot3name query
-          fsutil 8dot3name set 0
-          (Get-MpPreference).DisableRealtimeMonitoring
-          Set-MpPreference -DisableRealtimeMonitoring 0
-          (Get-MpPreference).DisableRealtimeMonitoring
-          Set-MpPreference -DisableRealtimeMonitoring 1
-          (Get-MpPreference).DisableRealtimeMonitoring
       - name: Checkout
         uses: actions/checkout@v3 
+      - name: install dependencies
+        shell: bash
+        run: |
+          curl https://developer.nvidia.com/cuda-toolkit-archive -o cuda-toolkit-archive.html
+          cat cuda-toolkit-archive.html
+      
