@@ -36,7 +36,7 @@ jobs:
         id: cheak_diff
         run: |
             ls --all
-            if [ "$(git rev-parse --verify --quiet --remotes origin create-pull-request/cuda)" ]; then
+            if [ "$(git rev-parse --verify --quiet --remotes create-pull-request/cuda)" == 0 ]; then
               git fetch origin create-pull-request/cuda --depth 1
               git checkout -b create-pull-request/cuda
               git reset --hard HEAD
