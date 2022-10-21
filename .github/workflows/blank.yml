@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          depth: 0
+          fetch-depth: 0
       - name: Check HTTP status
         uses: gerdemann/http-status-code@1.0.0
         with:
