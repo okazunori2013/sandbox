@@ -43,8 +43,7 @@ jobs:
               else
                 echo "diff=false" >> $GITHUB_OUTPUT
               fi &&
-            git checkout . &&
-            git checkout main ||
+            git reset --hard origin/main ||
             echo "diff=true" >> $GITHUB_OUTPUT
       - name: test
         id: test
