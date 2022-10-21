@@ -13,7 +13,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
       - name: Check HTTP status
         uses: gerdemann/http-status-code@1.0.0
         with:
@@ -38,7 +37,7 @@ jobs:
         id: cheak_diff
         run: |
             git branch -a
-            git fetch -q "origin create-pull-request/cuda"　|| echo "diff=true" >> $GITHUB_OUTPUT && exit 0
+            git checkout -q origin create-pull-request/cuda　|| echo "diff=true" >> $GITHUB_OUTPUT && exit 0
             git branch 
             git diff --name-only
             echo "test"
