@@ -44,7 +44,7 @@ jobs:
                 echo "diff=true" >> $GITHUB_OUTPUT
               else
                 echo "diff=false" >> $GITHUB_OUTPUT
-              fi
+              fi &&
             git checkout . &&
             git checkout main &&
             git branch ||
