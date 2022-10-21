@@ -35,7 +35,8 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
-            git fetch origin create-pull-request/cuda &&
+            git fetch origin create-pull-request/cuda ||
+            ! echo "diff=true" >> $GITHUB_OUTPUT &&
             git branch &&
             git diff --name-only &&
               if [ "$(git diff --name-only)" == "cuda-toolkit-archive.html" ]; then
@@ -45,8 +46,7 @@ jobs:
               fi &&
             git checkout main
             git reset --hard origin/main &&
-            git branch | awk '{ if ($1 != "*") print $1; }' | xargs git branch -D ||
-            echo "diff=true" >> $GITHUB_OUTPUT
+            git branch | awk '{ if ($1 != "*") print $1; }' | xargs git branch -D
       - name: test
         id: test
         run: |
