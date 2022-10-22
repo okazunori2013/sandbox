@@ -45,10 +45,10 @@ jobs:
           git add .
           git diff --ignore-space-at-eol cuda-toolkit-archive.html
           git reflog
-            if [ "$(git diff --ignore-space-at-eol --name-only cuda-toolkit-archive.html) == cuda-toolkit-archive.html" ]; then
-              echo "diff=false" >> $GITHUB_OUTPUT
-            else
+            if [ "$(git diff --ignore-space-at-eol --name-only cuda-toolkit-archive.html| wc -l)" -gt "0" ]; then
               echo "diff=true" >> $GITHUB_OUTPUT
+            else
+              echo "diff=fales" >> $GITHUB_OUTPUT
             fi 
       - name: test
         id: test
