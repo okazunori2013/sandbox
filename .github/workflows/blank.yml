@@ -94,3 +94,4 @@ jobs:
           echo ${{ steps.cheak_diff.outputs.diff }}
           echo ${{ steps.cuda-update.outputs.update }} cuda
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo ${{inputs.focce}}
