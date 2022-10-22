@@ -40,7 +40,7 @@ jobs:
         run: |
           git branch
           git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
-          git diff create-pull-request/cuda..origin/reate-pull-request/cuda da-toolkit-archive.html
+          git diff --ignore-space-at-eol  HEAD..origin/reate-pull-request/cuda --da-toolkit-archive.html
           git reset origin/create-pull-request/cuda
           git reflog
           git diff cuda-toolkit-archive.html
