@@ -34,29 +34,29 @@ jobs:
         with:
           name: cuda-toolkit-archive.html
           path: cuda-toolkit-archive.html
-      - name: Check for available updates
-        id: cheak_diff
-        run: |
-            git branch
-            git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
-            git reflog
-            git reset origin/create-pull-request/cuda
-            git reflog
-            git diff cuda-toolkit-archive.html
-            git reflog
-              if [ -n $(git diff create-pull-request/cuda..origin/create-pull-request/cuda) ]; then
-                echo "diff=true" >> $GITHUB_OUTPUT
-              else
-                echo "diff=false" >> $GITHUB_OUTPUT
-              fi 
-      - name: test
-        id: test
-        run: |
-          if [ ${{ steps.cheak_diff.outputs.diff }} == true ] && [ ${{ steps.cuda-update.outputs.update }} == true ]; then
-            echo "test=true" >> $GITHUB_OUTPUT
-          else
-            echo "test=false" >> $GITHUB_OUTPUT
-          fi
+#      - name: Check for available updates
+#        id: cheak_diff
+#        run: |
+#           git branch
+#            git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
+#            git reflog
+#            git reset origin/create-pull-request/cuda
+#            git reflog
+#            git diff cuda-toolkit-archive.html
+#            git reflog
+#              if [ -n $(git diff create-pull-request/cuda..origin/create-pull-request/cuda) ]; then
+#                echo "diff=true" >> $GITHUB_OUTPUT
+#              else
+#                echo "diff=false" >> $GITHUB_OUTPUT
+#              fi 
+#"      - name: test
+#        id: test
+#        run: |
+#          if [ ${{ steps.cheak_diff.outputs.diff }} == true ] && [ ${{ steps.cuda-update.outputs.update }} == true ]; then
+#            echo "test=true" >> $GITHUB_OUTPUT
+#          else
+#            echo "test=false" >> $GITHUB_OUTPUT
+#          fi
       - name: RE-Checkout
         uses: actions/checkout@v3
       - run: |
@@ -66,7 +66,7 @@ jobs:
           sed -i 1d cuda-toolkit-archive.html
       - name: Create Pull Request
         id: cpr
-        if: ${{ steps.test.outputs.test == 'true' }}
+        if: ${{ steps.cuda-update.outputs.update == 'true' }}
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
