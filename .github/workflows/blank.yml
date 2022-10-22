@@ -35,7 +35,7 @@ jobs:
         id: cheak_diff
         run: |
             git branch
-            git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
+            git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT & exit 0
             git reflog
             git reset origin/create-pull-request/cuda
             git reflog
