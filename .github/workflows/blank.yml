@@ -48,7 +48,7 @@ jobs:
           git commit -m A
           git diff --ignore-space-at-eol --name-only origin/create-pull-request/cuda..HEAD -- cuda-toolkit-archive.html
           git reflog
-            if [ "$(git diff --ignore-space-at-eol --name-only cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
+            if [ "$(git diff --ignore-space-at-eol --name-only origin/create-pull-request/cuda..HEAD -- cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
               echo "diff=true" >> $GITHUB_OUTPUT
             else
               echo "diff=false" >> $GITHUB_OUTPUT
