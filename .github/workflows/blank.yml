@@ -40,7 +40,7 @@ jobs:
             git reset origin/create-pull-request/cuda
             git branch
             git diff create-pull-request/cuda..origin/create-pull-request/cuda
-              if [ -n "$(git diff create-pull-request/cuda..origin/create-pull-request/cuda)"]; then
+              if [ -n $(git diff create-pull-request/cuda..origin/create-pull-request/cuda) ]; then
                 echo "diff=true" >> $GITHUB_OUTPUT
               else
                 echo "diff=false" >> $GITHUB_OUTPUT
