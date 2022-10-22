@@ -35,31 +35,31 @@ jobs:
         with:
           name: cuda-toolkit-archive.html
           path: cuda-toolkit-archive.html
-#      - name: Check for available updates
-#        id: cheak_diff
-#        run: |
-#          git branch
-#          git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
-#          git diff --ignore-space-at-eol  HEAD..origin/reate-pull-request/cuda -- cuda-toolkit-archive.html
-#          git reset origin/create-pull-request/cuda
-#          git reflog
-#          git diff cuda-toolkit-archive.html
-#          git reflog
-#            if [ -n $(git diff create-pull-request/cuda..origin/create-pull-request/cuda) ]; then
-#              echo "diff=true" >> $GITHUB_OUTPUT
-#            else
-#              echo "diff=false" >> $GITHUB_OUTPUT
-#            fi 
-#      - name: test
-#        id: test
-#        run: |
-#          if [ ${{ steps.cheak_diff.outputs.diff }} == true ] && [ ${{ steps.cuda-update.outputs.update }} == true ]; then
-#            echo "test=true" >> $GITHUB_OUTPUT
-#          else
-#            echo "test=false" >> $GITHUB_OUTPUT
-#          fi
-#      - name: RE-Checkout
-#        uses: actions/checkout@v3
+      - name: Check for available updates
+        id: cheak_diff
+        run: |
+          git branch
+          git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT & exit 0
+          git diff --ignore-space-at-eol  create-pull-request/cuda..origin/reate-pull-request/cuda -- cuda-toolkit-archive.html
+          git reset origin/create-pull-request/cuda
+          git reflog
+          git diff cuda-toolkit-archive.html
+          git reflog
+            if [ -n $(git diff create-pull-request/cuda..origin/create-pull-request/cuda) ]; then
+              echo "diff=true" >> $GITHUB_OUTPUT
+            else
+              echo "diff=false" >> $GITHUB_OUTPUT
+            fi 
+      - name: test
+        id: test
+        run: |
+          if [ ${{ steps.cheak_diff.outputs.diff }} == true ] && [ ${{ steps.cuda-update.outputs.update }} == true ]; then
+            echo "test=true" >> $GITHUB_OUTPUT
+          else
+            echo "test=false" >> $GITHUB_OUTPUT
+          fi
+      - name: RE-Checkout
+        uses: actions/checkout@v3
       - run: |
           curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
           sed -i 5d cuda-toolkit-archive.html
