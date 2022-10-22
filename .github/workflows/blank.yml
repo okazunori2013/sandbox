@@ -44,10 +44,11 @@ jobs:
           name: cuda-toolkit-archive.html
           path: cuda-toolkit-archive.html
       - name: Check for available updates
+        continue-on-error: true
         id: cheak_diff
         run: |
           git branch
-          git fetch origin create-pull-request/cuda || echo diff=true
+          git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
           git reset origin/create-pull-request/cuda
           git add .
           git commit -m A
