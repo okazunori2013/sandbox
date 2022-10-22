@@ -36,7 +36,6 @@ jobs:
         run: |
             git branch
             git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
-            git branch create-pull-request/cuda
             git checkout -b create-pull-request/cuda
             git reset origin/create-pull-request/cuda
             git branch
