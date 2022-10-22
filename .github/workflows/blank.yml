@@ -36,8 +36,11 @@ jobs:
         run: |
             git branch
             git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
+            git reflog
             git reset origin/create-pull-request/cuda
+            git reflog
             git diff cuda-toolkit-archive.html
+            git reflog
               if [ -n $(git diff create-pull-request/cuda..origin/create-pull-request/cuda) ]; then
                 echo "diff=true" >> $GITHUB_OUTPUT
               else
