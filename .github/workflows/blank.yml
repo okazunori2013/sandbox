@@ -25,6 +25,7 @@ jobs:
           sed -i 5d cuda-toolkit-archive.html
           sed -i 10d cuda-toolkit-archive.html
           sed -i 1d cuda-toolkit-archive.html
+          git diff --ignore-space-at-eol cuda-toolkit-archive.html
           if [ "$(git diff --ignore-space-at-eol cuda-toolkit-archive.html | wc -l)" -gt "0" ]; then
             echo "update=true" >> $GITHUB_OUTPUT
           else
@@ -49,7 +50,7 @@ jobs:
 #              else
 #                echo "diff=false" >> $GITHUB_OUTPUT
 #              fi 
-#"      - name: test
+#      - name: test
 #        id: test
 #        run: |
 #          if [ ${{ steps.cheak_diff.outputs.diff }} == true ] && [ ${{ steps.cuda-update.outputs.update }} == true ]; then
@@ -57,8 +58,8 @@ jobs:
 #          else
 #            echo "test=false" >> $GITHUB_OUTPUT
 #          fi
-      - name: RE-Checkout
-        uses: actions/checkout@v3
+#      - name: RE-Checkout
+#        uses: actions/checkout@v3
       - run: |
           curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
           sed -i 5d cuda-toolkit-archive.html
@@ -82,5 +83,5 @@ jobs:
         run: |
           echo ${{ steps.test.outputs.test }} test
           echo ${{ steps.cheak_diff.outputs.diff }}
-          echo ${{ steps.cuda-update.outputs.update }}
+          echo ${{ steps.cuda-update.outputs.update }} cuda
           echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
