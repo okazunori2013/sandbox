@@ -34,6 +34,8 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
+            sed -i 5d cuda-toolkit-archive.html
+            sed -i 11d cuda-toolkit-archive.html
             git branch
             git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT & exit 0
             git reflog
@@ -56,7 +58,10 @@ jobs:
           fi
       - name: RE-Checkout
         uses: actions/checkout@v3
-      - run: curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
+      - run: |
+           curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
+           sed -i 5d cuda-toolkit-archive.html
+           sed -i 11d cuda-toolkit-archive.html
       - name: Create Pull Request
         id: cpr
         if: ${{ steps.test.outputs.test == 'true' }}
