@@ -49,7 +49,6 @@ jobs:
           git branch
           git fetch origin create-pull-request/cuda || echo diff=true
           git reset origin/create-pull-request/cuda
-          git reflog
           git add .
           git commit -m A
           git reflog
