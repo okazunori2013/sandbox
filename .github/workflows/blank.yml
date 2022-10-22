@@ -34,6 +34,7 @@ jobs:
       - name: Check for available updates
         id: cheak_diff
         run: |
+            git branch
             git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
             git branch create-pull-request/cuda
             git reset create-pull-request/cuda
