@@ -43,7 +43,9 @@ jobs:
           git reset origin/create-pull-request/cuda
           git reflog
           git add .
-          git diff --ignore-space-at-eol --name-only cuda-toolkit-archive.html
+          git commit -m A
+          
+          git diff --ignore-space-at-eol --name-only origin/create-pull-request/cuda..HEAD -- cuda-toolkit-archive.html
           git reflog
             if [ "$(git diff --ignore-space-at-eol --name-only cuda-toolkit-archive.html| wc -l)" -gt "0" ]; then
               echo "diff=fales" >> $GITHUB_OUTPUT
