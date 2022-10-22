@@ -45,7 +45,7 @@ jobs:
           git add cuda-toolkit-archive.html
           git diff --ignore-space-at-eol cuda-toolkit-archive.html
           git reflog
-            if [ -n $(git diff create-pull-request/cuda..origin/create-pull-request/cuda) ]; then
+            if [ -n $(git diff --ignore-space-at-eol cuda-toolkit-archive.html) ]; then
               echo "diff=true" >> $GITHUB_OUTPUT
             else
               echo "diff=false" >> $GITHUB_OUTPUT
