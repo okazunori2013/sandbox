@@ -55,6 +55,7 @@ jobs:
           fi
       - name: RE-Checkout
         uses: actions/checkout@v3
+      - run: curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
       - name: Create Pull Request
         id: cpr
         if: ${{ steps.test.outputs.test == 'true' }}
