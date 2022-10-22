@@ -37,10 +37,10 @@ jobs:
             git branch
             git fetch origin create-pull-request/cuda || echo "diff=true" >> $GITHUB_OUTPUT
             git branch create-pull-request/cuda
+            git branch -b create-pull-request/cuda
+            git reset origin/create-pull-request/cuda
             git branch
-            git reset create-pull-request/cuda
-            git branch
-            git diff --name-only FECH_HEAD..origin/create-pull-request/cuda
+            git diff --name-only HEAD..origin/create-pull-request/cuda
               if [ "$(git diff --name-only)" == "cuda-toolkit-archive.html" ]; then
                 echo "diff=true" >> $GITHUB_OUTPUT
               else
