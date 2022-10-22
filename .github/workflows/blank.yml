@@ -67,7 +67,7 @@ jobs:
           sed -i 1d cuda-toolkit-archive.html
       - name: Create Pull Request
         id: cpr
-        if: ${{ steps.cuda-update.outputs.update == 'true' }}
+        if: ${{ steps.test.outputs.test == 'true' }}
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: "[bot]update cuda-toolkit-archive"
