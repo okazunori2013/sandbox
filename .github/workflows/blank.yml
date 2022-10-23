@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: okazunori2013/cuda-toolkit@test-2-digit
+        with:
+          cuda: '11.8.x'
       - name: Checkout
         uses: actions/checkout@v3
       - name: Check HTTP status
