@@ -1,8 +1,7 @@
 name: check-cuda
 
 on:
-  schedule:
-    - cron: '0 15 * * *'
+  push:
   workflow_dispatch:
     inputs:
       focce:
@@ -14,6 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: okazunori2013/cuda-toolkit@test-2-digit
       - name: Checkout
         uses: actions/checkout@v3
       - name: Check HTTP status
