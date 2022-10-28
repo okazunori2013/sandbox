@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: okazunori2013/cuda-toolkit@test-2-digit
+        uses: okazunori2013/cuda-toolkit@master
         with:
           cuda: '^11.7.0'
       - name: Checkout
