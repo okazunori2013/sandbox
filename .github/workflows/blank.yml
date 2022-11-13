@@ -24,6 +24,7 @@ jobs:
         shell: cmd
         id: cuda-update
         run: |
+          fsutil 8dot3name set 0
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git config --global core.autocrlf false
@@ -43,7 +44,7 @@ jobs:
         id: cuda-update
         shell: cmd
         run: |
-          8dot3name set 1
+          fsutil 8dot3name set 0
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
           git config --global core.autocrlf false
