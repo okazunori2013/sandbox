@@ -17,7 +17,7 @@ jobs:
         shell: cmd
         id: cuda-update
         run: |
-          timeout 600
+          Ping -n 60 localhost
   build2:
     runs-on: windows-latest
     steps:
@@ -26,4 +26,4 @@ jobs:
         shell: cmd
         run: |
           fsutil 8dot3name set 0
-          timeout 600
+          Ping -n 60 localhost
