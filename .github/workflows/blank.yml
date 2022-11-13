@@ -13,39 +13,17 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Check HTTP status
-        uses: gerdemann/http-status-code@1.0.0
-        with:
-          url: https://developer.nvidia.com/cuda-toolkit-archive
-          code: 200
       - name: install dependencies
         shell: cmd
         id: cuda-update
         run: |
-          git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
-          git config --global core.autocrlf false
-          curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
           timeout 600
   build2:
     runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Check HTTP status
-        uses: gerdemann/http-status-code@1.0.0
-        with:
-          url: https://developer.nvidia.com/cuda-toolkit-archive
-          code: 200
       - name: install dependencies
         id: cuda-update
         shell: cmd
         run: |
           fsutil 8dot3name set 0
-          git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
-          git config --global core.autocrlf false
-          curl https://developer.nvidia.com/cuda-toolkit-archive -o./cuda-toolkit-archive.html
           timeout 600
